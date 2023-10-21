@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -153,6 +154,23 @@ public class listagemVIEW extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
+    
+    private void listarProdutos() {
+        ProdutosDAO prod = new ProdutosDAO();
+        List<ProdutosDTO> pro = (List<ProdutosDTO>) prod.listarProdutos();
+
+        DefaultTableModel tab = (DefaultTableModel) listaProdutos.getModel();
+        tab.setNumRows(0);
+
+        for (ProdutosDTO a : pro) {
+            tab.addRow(new Object[]{
+                a.getId(),
+                a.getNome(),
+                a.getValor(),
+                a.getStatus()
+            });
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -181,10 +199,8 @@ public class listagemVIEW extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new listagemVIEW().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new listagemVIEW().setVisible(true);
         });
     }
 
@@ -201,25 +217,4 @@ public class listagemVIEW extends javax.swing.JFrame {
     private javax.swing.JTable listaProdutos;
     // End of variables declaration//GEN-END:variables
 
-    private void listarProdutos(){
-        try {
-            ProdutosDAO produtosdao = new ProdutosDAO();
-            
-            DefaultTableModel model = (DefaultTableModel) listaProdutos.getModel();
-            model.setNumRows(0);
-            
-            ArrayList<ProdutosDTO> listagem = produtosdao.listarProdutos();
-            
-            for(int i = 0; i < listagem.size(); i++){
-                model.addRow(new Object[]{
-                    listagem.get(i).getId(),
-                    listagem.get(i).getNome(),
-                    listagem.get(i).getValor(),
-                    listagem.get(i).getStatus()
-                });
-            }
-        } catch (Exception e) {
-        }
-    
-    }
 }

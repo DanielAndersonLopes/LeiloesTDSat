@@ -20,7 +20,7 @@ public class ProdutosDAO {
     
     Connection conn;
     PreparedStatement ps;
-    ResultSet resultset;
+    ResultSet rs;
     ArrayList<ProdutosDTO> listagem = new ArrayList<>();
     
     public ProdutosDAO() {
@@ -46,8 +46,26 @@ public class ProdutosDAO {
     }
     
     public ArrayList<ProdutosDTO> listarProdutos(){
-        
-        return listagem;
+        try {
+            String sql = "select * from Produtos";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                ProdutosDTO pro = new ProdutosDTO();
+                pro.setId(rs.getInt("id"));
+                pro.setNome(rs.getString("nome"));
+                pro.setValor(rs.getInt("valor"));
+                pro.setStatus(rs.getString("status"));
+
+                listagem.add(pro);
+            }
+            return listagem;
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao acessar os dados.");
+            return null;
+        }
     }
     
     
