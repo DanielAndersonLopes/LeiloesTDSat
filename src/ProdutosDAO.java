@@ -50,13 +50,13 @@ public class ProdutosDAO {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                ProdutosDTO pro = new ProdutosDTO();
-                pro.setId(rs.getInt("id"));
-                pro.setNome(rs.getString("nome"));
-                pro.setValor(rs.getInt("valor"));
-                pro.setStatus(rs.getString("status"));
+                ProdutosDTO produto = new ProdutosDTO();
+                produto.setId(rs.getInt("id"));
+                produto.setNome(rs.getString("nome"));
+                produto.setValor(rs.getInt("valor"));
+                produto.setStatus(rs.getString("status"));
 
-                listagem.add(pro);
+                listagem.add(produto);
             }
             return listagem;
 
@@ -84,4 +84,26 @@ public class ProdutosDAO {
         }
     }
 
+    public ArrayList<ProdutosDTO> listarProdutosVendidos() {
+        try {
+            String sql = "select * from Produtos WHERE status = 'Vendido'";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                ProdutosDTO produto = new ProdutosDTO();
+                produto.setId(rs.getInt("id"));
+                produto.setNome(rs.getString("nome"));
+                produto.setValor(rs.getInt("valor"));
+                produto.setStatus(rs.getString("status"));
+
+                listagem.add(produto);
+            }
+            return listagem;
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao acessar os dados.");
+            return null;
+        }
+    }
 }
