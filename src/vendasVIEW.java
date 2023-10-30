@@ -11,11 +11,11 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author danie
  */
-public class Vendas extends javax.swing.JFrame {
+public class vendasVIEW extends javax.swing.JFrame {
 
     listagemVIEW listagem;
     
-    public Vendas() {
+    public vendasVIEW() {
         initComponents();
         listarProdutos();
     }
@@ -122,7 +122,10 @@ public class Vendas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        java.awt.EventQueue.invokeLater(() -> {
+            new listagemVIEW().setVisible(true);
+            this.dispose();
+        });
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void listarProdutos() {
@@ -158,21 +161,20 @@ public class Vendas extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Vendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vendasVIEW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Vendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vendasVIEW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Vendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vendasVIEW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Vendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vendasVIEW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Vendas().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new vendasVIEW().setVisible(true);
         });
     }
 
